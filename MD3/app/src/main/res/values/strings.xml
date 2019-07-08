@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MakeupDrawer</string>
+    <string name="title_collection">Collection</string>
+    <string name="title_expiring">Expiring</string>
+    <string name="title_wishlist">Wish List</string>
+    <string name="makeup_tab">Makeup</string>
+    <string name="skincare_tab">Skincare</string>
+</resources>
