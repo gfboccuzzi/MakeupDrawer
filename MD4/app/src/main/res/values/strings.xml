@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">MakeupDrawer</string>
     <string name="title_collection">Collection</string>
+    <string name="title_collection_makeup">Makeup Collection</string>
+    <string name="title_collection_skincare">Skincare Collection</string>
     <string name="title_expiring">Expiring</string>
+    <string name="title_expiring_makeup">Makeup Expiring</string>
+    <string name="title_expiring_skincare">Skincare Expiring</string>
     <string name="title_wishlist">Wish List</string>
+    <string name="title_wishlist_makeup">Makeup Wish List</string>
+    <string name="title_wishlist_skincare">Skincare Wish List</string>
     <string name="makeup_tab">Makeup</string>
     <string name="skincare_tab">Skincare</string>
 </resources>

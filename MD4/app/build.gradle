@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "edu.wit.mobilepp.md4"
+        applicationId "edu.wit.mobilepp.md3"
         minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
