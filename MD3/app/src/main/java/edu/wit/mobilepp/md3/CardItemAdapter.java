@@ -42,6 +42,15 @@ public class CardItemAdapter extends ArrayAdapter<CardItem> {
         TextView shade;
         shade = (TextView) view.findViewById(R.id.shade);
         shade.setText(item.shade);
+
+        TextView purchase_date;
+        purchase_date = (TextView) view.findViewById(R.id.purchase_date);
+        purchase_date.setText(item.purchase_date);
+
+        TextView lifespan;
+        lifespan= (TextView) view.findViewById(R.id.lifespan);
+        lifespan.setText(item.lifespan);
+
         return view;
     }
 }

@@ -33,6 +33,8 @@ public class CollectionFragment_MakeupTab extends Fragment  {
         item1.product="Lip Color";
         item1.category = "Lipstick";
         item1.shade = "Smoke Sable";
+        item1.purchase_date = "10/29/18";
+        item1.lifespan = "24 Months";
         listItems.add(item1);
         CardItem item2 = new CardItem();
         item2.image = lipgloss;
@@ -40,13 +42,12 @@ public class CollectionFragment_MakeupTab extends Fragment  {
         item2.product="Gloss Bomb Universal Lip Luminizer";
         item2.category = "Lip Gloss";
         item2.shade = "FU$$Y";
+        item2.purchase_date = "07/14/19";
+        item2.lifespan = "24 Months";
         listItems.add(item2);
 
         ListView listView= (ListView) V.findViewById(R.id.MakeupCollectionTab);
-//
-//        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
-//                getActivity(), android.R.layout.simple_list_item_1, listItems
-//        );
+
         CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
         // Inflate the layout for this fragment

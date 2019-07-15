@@ -8,4 +8,6 @@ public class CardItem {
     public String product;
     public String category;
     public String shade;
+    public String purchase_date;
+    public String lifespan;
 }
