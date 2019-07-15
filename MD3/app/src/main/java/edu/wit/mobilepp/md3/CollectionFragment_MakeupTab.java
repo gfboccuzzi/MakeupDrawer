@@ -1,8 +1,10 @@
 package edu.wit.mobilepp.md3;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +32,7 @@ public class CollectionFragment_MakeupTab extends Fragment  {
         CardItem item1 = new CardItem();
         item1.image = lipstick;
         item1.brand = "Tom Ford";
-        item1.product="Lip Color";
+        item1.product = "Lip Color";
         item1.category = "Lipstick";
         item1.shade = "Smoke Sable";
         item1.purchase_date = "10/29/18";
@@ -39,7 +41,7 @@ public class CollectionFragment_MakeupTab extends Fragment  {
         CardItem item2 = new CardItem();
         item2.image = lipgloss;
         item2.brand = "FENTY BEAUTY by Rihanna";
-        item2.product="Gloss Bomb Universal Lip Luminizer";
+        item2.product = "Gloss Bomb Universal Lip Luminizer";
         item2.category = "Lip Gloss";
         item2.shade = "FU$$Y";
         item2.purchase_date = "07/14/19";
@@ -50,7 +52,18 @@ public class CollectionFragment_MakeupTab extends Fragment  {
 
         CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
-        // Inflate the layout for this fragment
+
+
+        FloatingActionButton mFab = (FloatingActionButton) V.findViewById(R.id.floatingActionButton);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(),NewProductMakeupCollection.class);
+                startActivity(intent);
+            }
+        });
+         // Inflate the layout for this fragment
         return V;
 
 

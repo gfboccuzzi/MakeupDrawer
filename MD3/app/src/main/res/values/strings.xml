@@ -11,4 +11,36 @@
     <string name="title_wishlist_skincare">Skincare Wish List</string>
     <string name="makeup_tab">Makeup</string>
     <string name="skincare_tab">Skincare</string>
+    <string name="brand_field">Brand Name</string>
+    <string name="product_field">Product Name</string>
+    <string name="shade_field">Shade</string>
+    <string name="purchase_field">Purchase Date</string>
+    <string name="lifespan_field">Lifespan</string>
+    <string name="new_item">Add Item</string>
+    <string name="create">Create A New Item</string>
+
+    <string-array name="makeup_types">
+        <item>BB and CC Cream</item>
+        <item>Blush</item>
+        <item>Bronzer</item>
+        <item>Concealer</item>
+        <item>Contour</item>
+        <item>Eye Primer</item>
+        <item>Eyebrow</item>
+        <item>Eyeliner</item>
+        <item>Eyeshadow</item>
+        <item>Face Primer</item>
+        <item>False Lashes</item>
+        <item>Foundation</item>
+        <item>Highlighter</item>
+        <item>Lip Gloss</item>
+        <item>Lip Liner</item>
+        <item>Lip Stain</item>
+        <item>Lipstick</item>
+        <item>Liquid Lipstick</item>
+        <item>Mascara</item>
+        <item>Setting Powder</item>
+        <item>Setting Spray</item>
+        <item>Tinted Moisturizer</item>
+    </string-array>
 </resources>
