@@ -18,30 +18,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionFragment_SkincareTab extends Fragment  {
-    public View V;
+    public View X;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View V = inflater.inflate(R.layout.fragment_collection_tab2_skincare, container, false);
+        View X = inflater.inflate(R.layout.fragment_collection_tab2_skincare, container, false);
 
         List<CardItem> listItems = new ArrayList<CardItem>();
 
-        ListView listView= (ListView) V.findViewById(R.id.SkincareCollectionTab);
+        ListView listView= (ListView) X.findViewById(R.id.SkincareCollectionTab);
 
         CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
         // Inflate the layout for this fragment
 
-        FloatingActionButton mFab = (FloatingActionButton) V.findViewById(R.id.floatingActionButton2);
+        FloatingActionButton mFab = (FloatingActionButton) X.findViewById(R.id.floatingActionButton2);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View x) {
                 Intent intent = new Intent(getActivity(), NewProductSkincareCollection.class);
                 intent.setClass(getActivity(),NewProductSkincareCollection.class);
                 startActivity(intent);
             }
         });
-        return V;
+        return X;
 
 
     }
@@ -111,7 +111,7 @@ public class CollectionFragment_SkincareTab extends Fragment  {
             item1.lifespan = life;
             listItems.add(item1);
 
-            ListView listView= (ListView) V.findViewById(R.id.SkincareCollectionTab);
+            ListView listView= (ListView) X.findViewById(R.id.SkincareCollectionTab);
 
             CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
             listView.setAdapter(listViewAdapter);
