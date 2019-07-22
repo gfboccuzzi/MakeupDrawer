@@ -1,11 +1,14 @@
 package edu.wit.mobilepp.md3;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,36 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionFragment_SkincareTab extends Fragment  {
+    public View V;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View V = inflater.inflate(R.layout.fragment_collection_tab2_skincare, container, false);
 
-        Bitmap watermelon;
-        watermelon =
-                BitmapFactory.decodeResource(getResources(), R.drawable.watermelon);
-        Bitmap avocado;
-        avocado =
-                BitmapFactory.decodeResource(getResources(), R.drawable.avocado);
         List<CardItem> listItems = new ArrayList<CardItem>();
-        CardItem item1 = new CardItem();
-        item1.image = watermelon;
-        item1.brand = "Glow Recipe";
-        item1.product="Watermelon + AHA Glow Sleeping Mask";
-        item1.category = "Face Mask";
-        item1.shade = "N/A";
-        item1.purchase_date = "04/03/18";
-        item1.lifespan = "18 Months";
-        listItems.add(item1);
-        CardItem item2 = new CardItem();
-        item2.image = avocado;
-        item2.brand = "Glow Recipe";
-        item2.product="Avocado Melt Sleeping Mask";
-        item2.category = "Face Mask";
-        item2.shade = "N/A";
-        item2.purchase_date = "04/30/19";
-        item1.lifespan = "18 Months";
-        listItems.add(item2);
 
         ListView listView= (ListView) V.findViewById(R.id.SkincareCollectionTab);
 
@@ -64,5 +44,80 @@ public class CollectionFragment_SkincareTab extends Fragment  {
         return V;
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        String path = "/data/data/" + getActivity().getPackageName() + "/skincare_collection.db";
+        Log.v("db", path);
+        // Open the database. If it doesn't exist, create it.
+        SQLiteDatabase db;
+        db = SQLiteDatabase.openOrCreateDatabase(path, null);
+        // Create a table - people
+        String sql = "CREATE TABLE IF NOT EXISTS skincare_collection" +
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
+
+        db.execSQL(sql);
+        String[] columns = {"brand","product","category","shade","date","life"};
+        String where = null;
+        String[] where_args = null;
+        String having = null;
+        String group_by = null;
+        String order_by = null;
+        Cursor cursor = db.query("skincare_collection", columns, where, where_args, group_by, having, order_by);
+        List<CardItem> listItems = new ArrayList<CardItem>();
+        while(cursor.moveToNext()){
+            String brand = cursor.getString(cursor.getColumnIndex("brand"));
+            String product = cursor.getString(cursor.getColumnIndex("product"));
+            String category = cursor.getString(cursor.getColumnIndex("category"));
+            String shade = cursor.getString(cursor.getColumnIndex("shade"));
+            String date = cursor.getString(cursor.getColumnIndex("date"));
+            String life = cursor.getString(cursor.getColumnIndex("life"));
+
+            Bitmap image;
+
+            if (category.equals("Cleanser")){
+                image =
+                        BitmapFactory.decodeResource(getResources(), R.drawable.cleanser); }
+            else if (category.equals("Eye Care")){
+                image =
+                        BitmapFactory.decodeResource(getResources(), R.drawable.eye_care);}
+            else if (category.equals("Masks")){
+                image =
+                        BitmapFactory.decodeResource(getResources(), R.drawable.masks);}
+            else if (category.equals("Moisturizer")){
+                image =
+                        BitmapFactory.decodeResource(getResources(), R.drawable.moisturizer);}
+            else if (category.equals("Self Tanner")){
+                image =
+                        BitmapFactory.decodeResource(getResources(), R.drawable.self_tanner);}
+            else if (category.equals("Treatment")){
+                image =
+                        BitmapFactory.decodeResource(getResources(), R.drawable.treatment);}
+            else {
+                image =
+                        BitmapFactory.decodeResource(getResources(), R.drawable.other);
+            }
+
+            CardItem item1 = new CardItem();
+            item1.image = image;
+            item1.brand = brand;
+            item1.product = product;
+            item1.category = category;
+            item1.shade = shade;
+            item1.purchase_date = date;
+            item1.lifespan = life;
+            listItems.add(item1);
+
+            ListView listView= (ListView) V.findViewById(R.id.SkincareCollectionTab);
+
+            CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+            listView.setAdapter(listViewAdapter);
+        }
+        Log.v("db", "end the printing");
+//Close the database
+        db.close();
     }
 }
