@@ -22,7 +22,7 @@ public class CollectionFragment_SkincareTab extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View X = inflater.inflate(R.layout.fragment_collection_tab2_skincare, container, false);
+        X = inflater.inflate(R.layout.fragment_collection_tab2_skincare, container, false);
 
         List<CardItem> listItems = new ArrayList<CardItem>();
 

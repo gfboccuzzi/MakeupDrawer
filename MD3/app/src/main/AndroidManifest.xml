@@ -20,6 +20,9 @@
         </activity>
         <activity android:name=".NewProductMakeupCollection"></activity>
         <activity android:name=".NewProductSkincareCollection"></activity>
+        <activity android:name=".NewProductSkincareWishList"></activity>
+        <activity android:name=".NewProductMakeupWishList"></activity>
+
     </application>
 
 </manifest>
