@@ -17,21 +17,19 @@ public class NewProductSkincareWishList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_new_product_skincare_collection);
+        setContentView(R.layout.add_new_product_skincare_wishlist);
 
-        spinner = (Spinner) findViewById(R.id.spinnersc);
+        spinner = (Spinner) findViewById(R.id.spinnerwlsc);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(NewProductSkincareWishList.this, android.R.layout.simple_spinner_item, skincares);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        Button add_btn = (Button)findViewById(R.id.additem_buttonsc);
+        Button add_btn = (Button)findViewById(R.id.additem_buttonwlsc);
 
         add_btn.setOnClickListener(new View.OnClickListener(){
-            TextInputEditText brand_name = (TextInputEditText)findViewById(R.id.brand_namesc);
-            TextInputEditText product_name = (TextInputEditText)findViewById(R.id.product_namesc);
-            TextInputEditText shade_name = (TextInputEditText)findViewById(R.id.shade_namesc);
-            TextInputEditText purchase_date = (TextInputEditText)findViewById(R.id.purchase_datesc);
-            TextInputEditText lifespan = (TextInputEditText)findViewById(R.id.lifespansc);
+            TextInputEditText brand_name = (TextInputEditText)findViewById(R.id.brand_namewlsc);
+            TextInputEditText product_name = (TextInputEditText)findViewById(R.id.product_namewlsc);
+            TextInputEditText shade_name = (TextInputEditText)findViewById(R.id.shade_namewlsc);
 
             @Override
             public void onClick(View v){
@@ -39,8 +37,6 @@ public class NewProductSkincareWishList extends AppCompatActivity {
                 String product = product_name.getText().toString();
                 String category = spinner.getSelectedItem().toString();
                 String shade = shade_name.getText().toString();
-                String date = purchase_date.getText().toString();
-                String life = lifespan.getText().toString();
 
                 // Set the path and database name
                 String path = "/data/data/" + getPackageName() + "/skincare_wishlist.db";
@@ -50,7 +46,7 @@ public class NewProductSkincareWishList extends AppCompatActivity {
                 db = SQLiteDatabase.openOrCreateDatabase(path, null);
                 // Create a table - people
                 String sql = "CREATE TABLE IF NOT EXISTS skincare_wishlist" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
+                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT);";
 
                 db.execSQL(sql);
 
@@ -60,8 +56,6 @@ public class NewProductSkincareWishList extends AppCompatActivity {
                 values.put("product", product);
                 values.put("category", category);
                 values.put("shade", shade);
-                values.put("date", date);
-                values.put("life", life);
                 db.insert("skincare_wishlist", null, values);
 
                 //Close the database

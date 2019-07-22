@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFD7E9"
-    android:id="@+id/constraintLayout1">
+    android:background="#FFD7E9">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout5"
+        android:id="@+id/textInputLayout5wlsc"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -23,14 +22,14 @@
         app:layout_constraintVertical_bias="0.088">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/brand_name"
+            android:id="@+id/brand_namewlsc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/brand_field" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/textInputLayoutwlsc"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -45,14 +44,14 @@
         app:layout_constraintVertical_bias="0.229">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/product_name"
+            android:id="@+id/product_namewlsc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/product_field" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/textInputLayout2wlsc"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -65,56 +64,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/shade_name"
+            android:id="@+id/shade_namewlsc"
             android:layout_width="361dp"
             android:layout_height="wrap_content"
             android:hint="@string/shade_field" />
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.642">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/purchase_date"
-            android:layout_width="361dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/purchase_field" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.815">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/lifespan"
-            android:layout_width="361dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/lifespan_field" />
-    </android.support.design.widget.TextInputLayout>
-
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerwlsc"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -130,7 +87,7 @@
         app:layout_constraintVertical_bias="0.367" />
 
     <Button
-        android:id="@+id/additem_button"
+        android:id="@+id/additem_buttonwlsc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -144,10 +101,10 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintVertical_bias="0.675" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewwlsc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -164,25 +121,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.014" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/questionbutton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#FF7697"
-        android:clickable="true"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.802"
-        app:srcCompat="@drawable/question"
-        app:elevation="0dp"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFD7E9">
+    android:background="#FFD7E9"
+    android:id="@+id/constraintLayout2">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout5sc"
@@ -65,7 +66,7 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/shade_namesc"
-            android:layout_width="match_parent"
+            android:layout_width="361dp"
             android:layout_height="wrap_content"
             android:hint="@string/shade_field" />
     </android.support.design.widget.TextInputLayout>
@@ -86,7 +87,7 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/purchase_datesc"
-            android:layout_width="match_parent"
+            android:layout_width="361dp"
             android:layout_height="wrap_content"
             android:hint="@string/purchase_field" />
     </android.support.design.widget.TextInputLayout>
@@ -107,7 +108,7 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/lifespansc"
-            android:layout_width="match_parent"
+            android:layout_width="361dp"
             android:layout_height="wrap_content"
             android:hint="@string/lifespan_field" />
     </android.support.design.widget.TextInputLayout>
@@ -163,5 +164,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.014" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/questionbutton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#FF7697"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.802"
+        app:srcCompat="@drawable/question"
+        app:elevation="0dp"/>
 
 </android.support.constraint.ConstraintLayout>

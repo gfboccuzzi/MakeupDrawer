@@ -1,19 +1,29 @@
 package edu.wit.mobilepp.md3;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 
 public class NewProductSkincareCollection extends AppCompatActivity {
     private Spinner spinner;
+    PopupWindow popupWindow;
+    ConstraintLayout constraintLayout2;
     private static final String[] skincares = {"Cleanser", "Eye Care", "Masks", "Moisturizer", "Self Tanner", "Treatment"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +34,28 @@ public class NewProductSkincareCollection extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(NewProductSkincareCollection.this, android.R.layout.simple_spinner_item, skincares);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+
+        FloatingActionButton question_btn = (FloatingActionButton)findViewById(R.id.questionbutton2);
+        constraintLayout2 = (ConstraintLayout)findViewById(R.id.constraintLayout2);
+        question_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater layoutInflater = (LayoutInflater) NewProductSkincareCollection.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.popup_window, null);
+
+                ImageButton closePopupBtn = (ImageButton)customView.findViewById(R.id.ib_close);
+                popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setElevation(20);
+                popupWindow.showAtLocation(constraintLayout2, Gravity.CENTER,0,0);
+
+                closePopupBtn.setOnClickListener(new View.OnClickListener(){
+                    public void onClick(View v){
+                        popupWindow.dismiss();
+                    }
+                });
+            }
+        });
 
         Button add_btn = (Button)findViewById(R.id.additem_buttonsc);
 

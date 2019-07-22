@@ -107,8 +107,6 @@ public class CollectionFragment_SkincareTab extends Fragment  {
             item1.product = product;
             item1.category = category;
             item1.shade = shade;
-            item1.purchase_date = date;
-            item1.lifespan = life;
             listItems.add(item1);
 
             ListView listView= (ListView) X.findViewById(R.id.SkincareCollectionTab);

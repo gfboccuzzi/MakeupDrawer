@@ -57,10 +57,10 @@ public class WishListFragment_SkincareTab extends Fragment  {
         db = SQLiteDatabase.openOrCreateDatabase(path, null);
         // Create a table - people
         String sql = "CREATE TABLE IF NOT EXISTS skincare_wishlist" +
-                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT);";
 
         db.execSQL(sql);
-        String[] columns = {"brand","product","category","shade","date","life"};
+        String[] columns = {"brand","product","category","shade"};
         String where = null;
         String[] where_args = null;
         String having = null;
@@ -73,8 +73,6 @@ public class WishListFragment_SkincareTab extends Fragment  {
             String product = cursor.getString(cursor.getColumnIndex("product"));
             String category = cursor.getString(cursor.getColumnIndex("category"));
             String shade = cursor.getString(cursor.getColumnIndex("shade"));
-            String date = cursor.getString(cursor.getColumnIndex("date"));
-            String life = cursor.getString(cursor.getColumnIndex("life"));
 
             Bitmap image;
 
@@ -107,8 +105,6 @@ public class WishListFragment_SkincareTab extends Fragment  {
             item1.product = product;
             item1.category = category;
             item1.shade = shade;
-            item1.purchase_date = date;
-            item1.lifespan = life;
             listItems.add(item1);
 
             ListView listView= (ListView) X.findViewById(R.id.SkincareWishListTab);

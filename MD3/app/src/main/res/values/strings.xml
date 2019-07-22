@@ -18,6 +18,10 @@
     <string name="lifespan_field">Lifespan</string>
     <string name="new_item">Add Item</string>
     <string name="create">Create A New Item</string>
+    <string name="question_title">What does this mean?</string>
+    <string name="question1">Almost every cosmetic product has a picture that looks like this on the packaging:</string>
+    <string name="question2">This is the shelf life of the product after it is opened. It is representative of the number of months product is good for.</string>
+    <string name="question3">If you don\'t know - don\'t worry! We have some predetermined lengths that types of products are generally good for, it\'s just always best to try to use a products specific shelf life.</string>
 
     <string-array name="makeup_types">
         <item>BB and CC Cream</item>
