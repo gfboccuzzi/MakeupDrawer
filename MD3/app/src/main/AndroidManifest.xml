@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CollectionFragment"></activity>
         <activity android:name=".NewProductMakeupCollection"></activity>
+        <activity android:name=".NewProductSkincareCollection"></activity>
     </application>
 
 </manifest>

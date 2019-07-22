@@ -1,8 +1,10 @@
 package edu.wit.mobilepp.md3;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +51,16 @@ public class CollectionFragment_SkincareTab extends Fragment  {
         CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
         // Inflate the layout for this fragment
+
+        FloatingActionButton mFab = (FloatingActionButton) V.findViewById(R.id.floatingActionButton2);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewProductSkincareCollection.class);
+                intent.setClass(getActivity(),NewProductSkincareCollection.class);
+                startActivity(intent);
+            }
+        });
         return V;
 
 
