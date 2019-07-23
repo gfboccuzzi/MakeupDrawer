@@ -1,6 +1,5 @@
 package edu.wit.mobilepp.md3;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,13 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.app.Activity.RESULT_OK;
 
 public class CollectionFragment_MakeupTab extends Fragment  {
     public View V;
@@ -29,11 +25,11 @@ public class CollectionFragment_MakeupTab extends Fragment  {
         V = inflater.inflate(R.layout.fragment_collection_tab1_makeup, container, false);
 
 
-        List<CardItem> listItems = new ArrayList<CardItem>();
+        List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
 
         ListView listView= (ListView) V.findViewById(R.id.MakeupCollectionTab);
 
-        CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
 
 
@@ -68,15 +64,16 @@ public class CollectionFragment_MakeupTab extends Fragment  {
                 "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
 
         db.execSQL(sql);
-        String[] columns = {"brand","product","category","shade","date","life"};
+        String[] columns = {"_id","brand","product","category","shade","date","life"};
         String where = null;
         String[] where_args = null;
         String having = null;
         String group_by = null;
         String order_by = null;
         Cursor cursor = db.query("makeup_collection", columns, where, where_args, group_by, having, order_by);
-        List<CardItem> listItems = new ArrayList<CardItem>();
+        List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
         while(cursor.moveToNext()){
+            String _id = cursor.getString(cursor.getColumnIndex("_id"));
             String brand = cursor.getString(cursor.getColumnIndex("brand"));
             String product = cursor.getString(cursor.getColumnIndex("product"));
             String category = cursor.getString(cursor.getColumnIndex("category"));
@@ -151,17 +148,20 @@ public class CollectionFragment_MakeupTab extends Fragment  {
                         BitmapFactory.decodeResource(getResources(), R.drawable.other);
             }
 
-            CardItem item1 = new CardItem();
+            CardItemMakeupCollection item1 = new CardItemMakeupCollection();
             item1.image = image;
+            item1.id = _id;
             item1.brand = brand;
             item1.product = product;
             item1.category = category;
             item1.shade = shade;
+            item1.purchase_date = date;
+            item1.lifespan = life;
             listItems.add(item1);
 
             ListView listView= (ListView) V.findViewById(R.id.MakeupCollectionTab);
 
-            CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+            CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
             listView.setAdapter(listViewAdapter);
         }
         Log.v("db", "end the printing");

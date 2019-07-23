@@ -25,11 +25,11 @@ public class WishListFragment_MakeupTab extends Fragment  {
         V = inflater.inflate(R.layout.fragment_wishlist_tab1_makeup, container, false);
 
 
-        List<CardItem> listItems = new ArrayList<CardItem>();
+        List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
 
         ListView listView= (ListView) V.findViewById(R.id.MakeupWishListTab);
 
-        CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
 
 
@@ -71,7 +71,7 @@ public class WishListFragment_MakeupTab extends Fragment  {
         String group_by = null;
         String order_by = null;
         Cursor cursor = db.query("makeup_wishlist", columns, where, where_args, group_by, having, order_by);
-        List<CardItem> listItems = new ArrayList<CardItem>();
+        List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
         while(cursor.moveToNext()){
             String brand = cursor.getString(cursor.getColumnIndex("brand"));
             String product = cursor.getString(cursor.getColumnIndex("product"));
@@ -145,7 +145,7 @@ public class WishListFragment_MakeupTab extends Fragment  {
                         BitmapFactory.decodeResource(getResources(), R.drawable.other);
             }
 
-            CardItem item1 = new CardItem();
+            CardItemMakeupCollection item1 = new CardItemMakeupCollection();
             item1.image = image;
             item1.brand = brand;
             item1.product = product;
@@ -155,7 +155,7 @@ public class WishListFragment_MakeupTab extends Fragment  {
 
             ListView listView= (ListView) V.findViewById(R.id.MakeupWishListTab);
 
-            CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+            CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
             listView.setAdapter(listViewAdapter);
         }
         Log.v("db", "end the printing");

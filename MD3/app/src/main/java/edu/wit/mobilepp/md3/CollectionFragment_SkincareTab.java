@@ -24,11 +24,11 @@ public class CollectionFragment_SkincareTab extends Fragment  {
                              Bundle savedInstanceState) {
         X = inflater.inflate(R.layout.fragment_collection_tab2_skincare, container, false);
 
-        List<CardItem> listItems = new ArrayList<CardItem>();
+        List<CardItemSkincareCollection> listItems = new ArrayList<CardItemSkincareCollection>();
 
         ListView listView= (ListView) X.findViewById(R.id.SkincareCollectionTab);
 
-        CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        CardItemSkincareCollectionAdapter listViewAdapter = new CardItemSkincareCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
         // Inflate the layout for this fragment
 
@@ -60,15 +60,16 @@ public class CollectionFragment_SkincareTab extends Fragment  {
                 "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
 
         db.execSQL(sql);
-        String[] columns = {"brand","product","category","shade","date","life"};
+        String[] columns = {"_id","brand","product","category","shade","date","life"};
         String where = null;
         String[] where_args = null;
         String having = null;
         String group_by = null;
         String order_by = null;
         Cursor cursor = db.query("skincare_collection", columns, where, where_args, group_by, having, order_by);
-        List<CardItem> listItems = new ArrayList<CardItem>();
+        List<CardItemSkincareCollection> listItems = new ArrayList<CardItemSkincareCollection>();
         while(cursor.moveToNext()){
+            String _id = cursor.getString(cursor.getColumnIndex("_id"));
             String brand = cursor.getString(cursor.getColumnIndex("brand"));
             String product = cursor.getString(cursor.getColumnIndex("product"));
             String category = cursor.getString(cursor.getColumnIndex("category"));
@@ -101,17 +102,20 @@ public class CollectionFragment_SkincareTab extends Fragment  {
                         BitmapFactory.decodeResource(getResources(), R.drawable.other);
             }
 
-            CardItem item1 = new CardItem();
+            CardItemSkincareCollection item1 = new CardItemSkincareCollection();
             item1.image = image;
+            item1.id = _id;
             item1.brand = brand;
             item1.product = product;
             item1.category = category;
             item1.shade = shade;
+            item1.purchase_date = date;
+            item1.lifespan = life;
             listItems.add(item1);
 
             ListView listView= (ListView) X.findViewById(R.id.SkincareCollectionTab);
 
-            CardItemAdapter listViewAdapter = new CardItemAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+            CardItemSkincareCollectionAdapter listViewAdapter = new CardItemSkincareCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
             listView.setAdapter(listViewAdapter);
         }
         Log.v("db", "end the printing");
