@@ -24,11 +24,11 @@ public class WishListFragment_SkincareTab extends Fragment  {
                              Bundle savedInstanceState) {
         X = inflater.inflate(R.layout.fragment_wishlist_tab2_skincare, container, false);
 
-        List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
+        List<CardItemSkincareWishList> listItems = new ArrayList<CardItemSkincareWishList>();
 
         ListView listView= (ListView) X.findViewById(R.id.SkincareWishListTab);
 
-        CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        CardItemSkincareWishListAdapter listViewAdapter = new CardItemSkincareWishListAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
         // Inflate the layout for this fragment
 
@@ -67,7 +67,7 @@ public class WishListFragment_SkincareTab extends Fragment  {
         String group_by = null;
         String order_by = null;
         Cursor cursor = db.query("skincare_wishlist", columns, where, where_args, group_by, having, order_by);
-        List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
+        List<CardItemSkincareWishList> listItems = new ArrayList<CardItemSkincareWishList>();
         while(cursor.moveToNext()){
             String brand = cursor.getString(cursor.getColumnIndex("brand"));
             String product = cursor.getString(cursor.getColumnIndex("product"));
@@ -99,7 +99,7 @@ public class WishListFragment_SkincareTab extends Fragment  {
                         BitmapFactory.decodeResource(getResources(), R.drawable.other);
             }
 
-            CardItemMakeupCollection item1 = new CardItemMakeupCollection();
+            CardItemSkincareWishList item1 = new CardItemSkincareWishList();
             item1.image = image;
             item1.brand = brand;
             item1.product = product;
@@ -109,7 +109,7 @@ public class WishListFragment_SkincareTab extends Fragment  {
 
             ListView listView= (ListView) X.findViewById(R.id.SkincareWishListTab);
 
-            CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+            CardItemSkincareWishListAdapter listViewAdapter = new CardItemSkincareWishListAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
             listView.setAdapter(listViewAdapter);
         }
         Log.v("db", "end the printing");

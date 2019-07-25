@@ -25,11 +25,11 @@ public class WishListFragment_MakeupTab extends Fragment  {
         V = inflater.inflate(R.layout.fragment_wishlist_tab1_makeup, container, false);
 
 
-        List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
+        List<CardItemMakeupWishList> listItems = new ArrayList<CardItemMakeupWishList>();
 
         ListView listView= (ListView) V.findViewById(R.id.MakeupWishListTab);
 
-        CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        CardItemMakeupWishListAdapter listViewAdapter = new CardItemMakeupWishListAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
 
 
@@ -64,15 +64,16 @@ public class WishListFragment_MakeupTab extends Fragment  {
                 "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT);";
 
         db.execSQL(sql);
-        String[] columns = {"brand","product","category","shade","date","life"};
+        String[] columns = {"_id","brand","product","category","shade","date","life"};
         String where = null;
         String[] where_args = null;
         String having = null;
         String group_by = null;
         String order_by = null;
         Cursor cursor = db.query("makeup_wishlist", columns, where, where_args, group_by, having, order_by);
-        List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
+        List<CardItemMakeupWishList> listItems = new ArrayList<CardItemMakeupWishList>();
         while(cursor.moveToNext()){
+            String _id = cursor.getString(cursor.getColumnIndex("_id"));
             String brand = cursor.getString(cursor.getColumnIndex("brand"));
             String product = cursor.getString(cursor.getColumnIndex("product"));
             String category = cursor.getString(cursor.getColumnIndex("category"));
@@ -145,7 +146,8 @@ public class WishListFragment_MakeupTab extends Fragment  {
                         BitmapFactory.decodeResource(getResources(), R.drawable.other);
             }
 
-            CardItemMakeupCollection item1 = new CardItemMakeupCollection();
+            CardItemMakeupWishList item1 = new CardItemMakeupWishList();
+            item1.id = _id;
             item1.image = image;
             item1.brand = brand;
             item1.product = product;
@@ -155,7 +157,7 @@ public class WishListFragment_MakeupTab extends Fragment  {
 
             ListView listView= (ListView) V.findViewById(R.id.MakeupWishListTab);
 
-            CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
+            CardItemMakeupWishListAdapter listViewAdapter = new CardItemMakeupWishListAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
             listView.setAdapter(listViewAdapter);
         }
         Log.v("db", "end the printing");

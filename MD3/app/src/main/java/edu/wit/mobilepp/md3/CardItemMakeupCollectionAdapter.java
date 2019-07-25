@@ -69,8 +69,6 @@ public class CardItemMakeupCollectionAdapter extends ArrayAdapter<CardItemMakeup
                 String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
                         "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
                 db.execSQL(sql);
-//                String[] deleteArgs = {""+position+""};
-//                db.delete("makeup_collection", "_id=?", deleteArgs);
                 db.execSQL("DELETE FROM makeup_collection WHERE _ID= " + item.id);
                 db.close();
 
