@@ -60,7 +60,7 @@ public class WishListFragment_SkincareTab extends Fragment  {
                 "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT);";
 
         db.execSQL(sql);
-        String[] columns = {"brand","product","category","shade"};
+        String[] columns = {"_id","brand","product","category","shade"};
         String where = null;
         String[] where_args = null;
         String having = null;
@@ -69,6 +69,7 @@ public class WishListFragment_SkincareTab extends Fragment  {
         Cursor cursor = db.query("skincare_wishlist", columns, where, where_args, group_by, having, order_by);
         List<CardItemSkincareWishList> listItems = new ArrayList<CardItemSkincareWishList>();
         while(cursor.moveToNext()){
+            String _id = cursor.getString(cursor.getColumnIndex("_id"));
             String brand = cursor.getString(cursor.getColumnIndex("brand"));
             String product = cursor.getString(cursor.getColumnIndex("product"));
             String category = cursor.getString(cursor.getColumnIndex("category"));
@@ -100,6 +101,7 @@ public class WishListFragment_SkincareTab extends Fragment  {
             }
 
             CardItemSkincareWishList item1 = new CardItemSkincareWishList();
+            item1.id = _id;
             item1.image = image;
             item1.brand = brand;
             item1.product = product;
