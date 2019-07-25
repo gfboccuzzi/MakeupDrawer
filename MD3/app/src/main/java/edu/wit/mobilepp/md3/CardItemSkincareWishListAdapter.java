@@ -118,9 +118,30 @@ public class CardItemSkincareWishListAdapter extends ArrayAdapter<CardItemSkinca
                             date="a";
                             e.printStackTrace();
                         }
-                        Integer life = Integer.parseInt(lifespan.getText().toString());
-
-                        Log.v("wl", date);
+                        Integer life;
+                        try {
+                            life = Integer.parseInt(lifespan.getText().toString());
+                        }catch(NumberFormatException e){
+                            life=null;
+                        }
+                        if(item.category.equals("Cleanser") && life==null){
+                            life=12;
+                        }
+                        if(item.category.equals("Eye Care") && life==null){
+                            life=12;
+                        }
+                        if(item.category.equals("Masks") && life==null){
+                            life=12;
+                        }
+                        if(item.category.equals("Moisturizer") && life==null){
+                            life=12;
+                        }
+                        if(item.category.equals("Self Tanner") && life==null){
+                            life=12;
+                        }
+                        if(item.category.equals("Treatment") && life==null){
+                            life=12;
+                        }
                         String path = "/data/data/" + getContext().getPackageName() + "/skincare_wishlist.db";
                         SQLiteDatabase db;
                         db = SQLiteDatabase.openOrCreateDatabase(path, null);

@@ -93,7 +93,72 @@ public class NewProductMakeupCollection extends AppCompatActivity {
                     date="a";
                     e.printStackTrace();
                 }
-                Integer life = Integer.parseInt(lifespan.getText().toString());
+                Integer life;
+                try {
+                    life = Integer.parseInt(lifespan.getText().toString());
+                }catch(NumberFormatException e){
+                    life=null;
+                }
+                if(category.equals("Blush") && life==null){
+                    life=24;
+                }
+                if (category.equals("Bronzer") && life == null) {
+                    life=24;
+                }
+                if (category.equals("Concealer") && life == null) {
+                    life=24;
+                }
+                if (category.equals("Contour") && life == null) {
+                    life=24;
+                }
+                if (category.equals("Eye Primer") && life == null) {
+                    life=12;
+                }
+                if (category.equals("Eyebrow") && life == null) {
+                    life=24;
+                }
+                if (category.equals("Eyeliner") && life == null) {
+                    life=24;
+                }
+                if (category.equals("Eyeshadow") && life == null) {
+                    life=24;
+                }
+                if (category.equals("Face Primer") && life == null) {
+                    life=12;
+                }
+                if (category.equals("False Lashes") && life == null) {
+                    life=60;
+                }
+                if (category.equals("Foundation") && life == null) {
+                    life=12;
+                }
+                if (category.equals("Highlighter") && life == null) {
+                    life=24;
+                }
+                if (category.equals("Lip Gloss") && life == null) {
+                    life=6;
+                }
+                if (category.equals("Lip Liner") && life == null) {
+                    life=24;
+                }
+                if (category.equals("Lipstick") && life == null) {
+                    life=12;
+                }
+                if (category.equals("Liquid Lipstick") && life == null) {
+                    life=6;
+                }
+                if (category.equals("Mascara") && life == null) {
+                    life=4;
+                }
+                if (category.equals("Setting Powder") && life == null) {
+                    life=24;
+                }
+                if (category.equals("Setting Spray") && life == null) {
+                    life=12;
+                }
+                if (category.equals("Tinted Moisturizer") && life == null) {
+                    life=12;
+                }
 
                 // Set the path and database name
                 String path = "/data/data/" + getPackageName() + "/makeup_collection.db";

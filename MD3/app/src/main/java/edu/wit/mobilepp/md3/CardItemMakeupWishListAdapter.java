@@ -118,7 +118,72 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
                             date="a";
                             e.printStackTrace();
                         }
-                        Integer life = Integer.parseInt(lifespan.getText().toString());
+                        Integer life;
+                        try {
+                            life = Integer.parseInt(lifespan.getText().toString());
+                        }catch(NumberFormatException e){
+                            life=null;
+                        }
+                        if(item.category.equals("Blush") && life==null){
+                            life=24;
+                        }
+                        if (item.category.equals("Bronzer") && life == null) {
+                            life=24;
+                        }
+                        if (item.category.equals("Concealer") && life == null) {
+                            life=24;
+                        }
+                        if (item.category.equals("Contour") && life == null) {
+                            life=24;
+                        }
+                        if (item.category.equals("Eye Primer") && life == null) {
+                            life=12;
+                        }
+                        if (item.category.equals("Eyebrow") && life == null) {
+                            life=24;
+                        }
+                        if (item.category.equals("Eyeliner") && life == null) {
+                            life=24;
+                        }
+                        if (item.category.equals("Eyeshadow") && life == null) {
+                            life=24;
+                        }
+                        if (item.category.equals("Face Primer") && life == null) {
+                            life=12;
+                        }
+                        if (item.category.equals("False Lashes") && life == null) {
+                            life=60;
+                        }
+                        if (item.category.equals("Foundation") && life == null) {
+                            life=12;
+                        }
+                        if (item.category.equals("Highlighter") && life == null) {
+                            life=24;
+                        }
+                        if (item.category.equals("Lip Gloss") && life == null) {
+                            life=6;
+                        }
+                        if (item.category.equals("Lip Liner") && life == null) {
+                            life=24;
+                        }
+                        if (item.category.equals("Lipstick") && life == null) {
+                            life=12;
+                        }
+                        if (item.category.equals("Liquid Lipstick") && life == null) {
+                            life=6;
+                        }
+                        if (item.category.equals("Mascara") && life == null) {
+                            life=4;
+                        }
+                        if (item.category.equals("Setting Powder") && life == null) {
+                            life=24;
+                        }
+                        if (item.category.equals("Setting Spray") && life == null) {
+                            life=12;
+                        }
+                        if (item.category.equals("Tinted Moisturizer") && life == null) {
+                            life=12;
+                        }
 
                         Log.v("wl", date);
                         String path = "/data/data/" + getContext().getPackageName() + "/makeup_wishlist.db";

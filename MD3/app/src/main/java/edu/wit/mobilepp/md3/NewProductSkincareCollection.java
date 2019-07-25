@@ -87,7 +87,30 @@ public class NewProductSkincareCollection extends AppCompatActivity {
                     date="a";
                     e.printStackTrace();
                 }
-                Integer life = Integer.parseInt(lifespan.getText().toString());
+                Integer life;
+                try {
+                    life = Integer.parseInt(lifespan.getText().toString());
+                }catch(NumberFormatException e){
+                    life=null;
+                }
+                if(category.equals("Cleanser") && life==null){
+                    life=12;
+                }
+                if(category.equals("Eye Care") && life==null){
+                    life=12;
+                }
+                if(category.equals("Masks") && life==null){
+                    life=12;
+                }
+                if(category.equals("Moisturizer") && life==null){
+                    life=12;
+                }
+                if(category.equals("Self Tanner") && life==null){
+                    life=12;
+                }
+                if(category.equals("Treatment") && life==null){
+                    life=12;
+                }
 
                 // Set the path and database name
                 String path = "/data/data/" + getPackageName() + "/skincare_collection.db";

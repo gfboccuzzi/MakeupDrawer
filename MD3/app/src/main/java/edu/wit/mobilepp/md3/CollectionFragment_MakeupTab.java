@@ -61,7 +61,7 @@ public class CollectionFragment_MakeupTab extends Fragment  {
         db = SQLiteDatabase.openOrCreateDatabase(path, null);
         // Create a table - people
         String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER);";
 
         db.execSQL(sql);
         String[] columns = {"_id","brand","product","category","shade","date","life"};
@@ -79,13 +79,19 @@ public class CollectionFragment_MakeupTab extends Fragment  {
             String category = cursor.getString(cursor.getColumnIndex("category"));
             String shade = cursor.getString(cursor.getColumnIndex("shade"));
             String date = cursor.getString(cursor.getColumnIndex("date"));
-            String life = cursor.getString(cursor.getColumnIndex("life"));
+            Integer life;
+            try {
+                life = Integer.parseInt(cursor.getString(cursor.getColumnIndex("life")));
+            }catch(NumberFormatException e){
+                life=null;
+            }
 
             Bitmap image;
 
             if (category.equals("Blush")){
                 image =
-                        BitmapFactory.decodeResource(getResources(), R.drawable.blush); }
+                        BitmapFactory.decodeResource(getResources(), R.drawable.blush);
+            }
             else if (category.equals("Bronzer")){
                 image =
                         BitmapFactory.decodeResource(getResources(), R.drawable.bronzer);}

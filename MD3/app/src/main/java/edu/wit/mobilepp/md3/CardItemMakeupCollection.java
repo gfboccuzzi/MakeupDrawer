@@ -10,5 +10,5 @@ public class CardItemMakeupCollection {
     public String category;
     public String shade;
     public String purchase_date;
-    public String lifespan;
+    public Integer lifespan;
 }
