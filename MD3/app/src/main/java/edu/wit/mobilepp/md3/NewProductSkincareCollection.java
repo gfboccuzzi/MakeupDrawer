@@ -20,6 +20,11 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class NewProductSkincareCollection extends AppCompatActivity {
     private Spinner spinner;
     PopupWindow popupWindow;
@@ -72,8 +77,17 @@ public class NewProductSkincareCollection extends AppCompatActivity {
                 String product = product_name.getText().toString();
                 String category = spinner.getSelectedItem().toString();
                 String shade = shade_name.getText().toString();
-                String date = purchase_date.getText().toString();
-                String life = lifespan.getText().toString();
+                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                String date;
+                try {
+                    Date date1 = dateFormat.parse(purchase_date.getText().toString());
+                    date = dateFormat.format(date1);
+                    Log.v("new",date1.toString());
+                }catch (ParseException e){
+                    date="a";
+                    e.printStackTrace();
+                }
+                Integer life = Integer.parseInt(lifespan.getText().toString());
 
                 // Set the path and database name
                 String path = "/data/data/" + getPackageName() + "/skincare_collection.db";
@@ -83,7 +97,7 @@ public class NewProductSkincareCollection extends AppCompatActivity {
                 db = SQLiteDatabase.openOrCreateDatabase(path, null);
                 // Create a table - people
                 String sql = "CREATE TABLE IF NOT EXISTS skincare_collection" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
+                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER);";
 
                 db.execSQL(sql);
 

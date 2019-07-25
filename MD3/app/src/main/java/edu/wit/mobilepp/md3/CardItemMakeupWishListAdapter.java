@@ -17,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWishList> {
@@ -104,8 +108,18 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
                     TextInputEditText lifespan = (TextInputEditText)customView.findViewById(R.id.lifespan2);
                     @Override
                     public void onClick(View v) {
-                        String date = purchase_date.getText().toString();
-                        String life = lifespan.getText().toString();
+                        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                        String date;
+                        try {
+                            Date date1 = dateFormat.parse(purchase_date.getText().toString());
+                            date = dateFormat.format(date1);
+                            Log.v("new",date1.toString());
+                        }catch (ParseException e){
+                            date="a";
+                            e.printStackTrace();
+                        }
+                        Integer life = Integer.parseInt(lifespan.getText().toString());
+
                         Log.v("wl", date);
                         String path = "/data/data/" + getContext().getPackageName() + "/makeup_wishlist.db";
                         SQLiteDatabase db;
@@ -115,7 +129,7 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
                         db2 = SQLiteDatabase.openOrCreateDatabase(path2, null);
                         // Create a table - people
                         String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
+                                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER);";
                         db2.execSQL(sql);
                         ContentValues values = new ContentValues();
                         values.put("brand", item.brand);

@@ -19,6 +19,12 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class NewProductMakeupCollection extends AppCompatActivity {
     private Spinner spinner;
@@ -67,17 +73,27 @@ public class NewProductMakeupCollection extends AppCompatActivity {
             TextInputEditText brand_name = (TextInputEditText)findViewById(R.id.brand_name);
             TextInputEditText product_name = (TextInputEditText)findViewById(R.id.product_name);
             TextInputEditText shade_name = (TextInputEditText)findViewById(R.id.shade_name);
-            TextInputEditText purchase_date = (TextInputEditText)findViewById(R.id.purchase_date);
             TextInputEditText lifespan = (TextInputEditText)findViewById(R.id.lifespan);
+            TextInputEditText purchase_date = (TextInputEditText) findViewById(R.id.purchase_date);
 
             @Override
             public void onClick(View v) {
+                Log.v("new", "click registered");
                 String brand = brand_name.getText().toString();
                 String product = product_name.getText().toString();
                 String category = spinner.getSelectedItem().toString();
                 String shade = shade_name.getText().toString();
-                String date = purchase_date.getText().toString();
-                String life = lifespan.getText().toString();
+                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                String date;
+                try {
+                    Date date1 = dateFormat.parse(purchase_date.getText().toString());
+                    date = dateFormat.format(date1);
+                    Log.v("new",date1.toString());
+                }catch (ParseException e){
+                    date="a";
+                    e.printStackTrace();
+                }
+                Integer life = Integer.parseInt(lifespan.getText().toString());
 
                 // Set the path and database name
                 String path = "/data/data/" + getPackageName() + "/makeup_collection.db";
@@ -87,7 +103,7 @@ public class NewProductMakeupCollection extends AppCompatActivity {
                 db = SQLiteDatabase.openOrCreateDatabase(path, null);
                 // Create a table - people
                 String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
+                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER);";
 
                 db.execSQL(sql);
 

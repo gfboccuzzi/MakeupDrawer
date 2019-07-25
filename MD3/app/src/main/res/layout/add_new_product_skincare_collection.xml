@@ -89,7 +89,8 @@
             android:id="@+id/purchase_datesc"
             android:layout_width="361dp"
             android:layout_height="wrap_content"
-            android:hint="@string/purchase_field" />
+            android:hint="@string/purchase_field"
+            android:inputType="date"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -110,7 +111,8 @@
             android:id="@+id/lifespansc"
             android:layout_width="361dp"
             android:layout_height="wrap_content"
-            android:hint="@string/lifespan_field" />
+            android:hint="@string/lifespan_field"
+            android:inputType="number"/>
     </android.support.design.widget.TextInputLayout>
 
     <Spinner
