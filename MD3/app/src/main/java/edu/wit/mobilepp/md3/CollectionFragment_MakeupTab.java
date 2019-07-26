@@ -14,7 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CollectionFragment_MakeupTab extends Fragment  {
@@ -31,7 +35,8 @@ public class CollectionFragment_MakeupTab extends Fragment  {
 
         CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
-
+        listView.setDivider(null);
+        listView.setDividerHeight(0);
 
          // Inflate the layout for this fragment
         FloatingActionButton mFab = (FloatingActionButton) V.findViewById(R.id.floatingActionButton);
@@ -61,10 +66,10 @@ public class CollectionFragment_MakeupTab extends Fragment  {
         db = SQLiteDatabase.openOrCreateDatabase(path, null);
         // Create a table - people
         String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER);";
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
 
         db.execSQL(sql);
-        String[] columns = {"_id","brand","product","category","shade","date","life"};
+        String[] columns = {"_id","brand","product","category","shade","date","life","days"};
         String where = null;
         String[] where_args = null;
         String having = null;
@@ -85,6 +90,12 @@ public class CollectionFragment_MakeupTab extends Fragment  {
             }catch(NumberFormatException e){
                 life=null;
             }
+//            Integer days;
+//            try {
+//                days = Integer.parseInt(cursor.getString(cursor.getColumnIndex("days")));
+//            }catch(NumberFormatException e){
+//                days=null;
+//            }
 
             Bitmap image;
 
@@ -163,6 +174,7 @@ public class CollectionFragment_MakeupTab extends Fragment  {
             item1.shade = shade;
             item1.purchase_date = date;
             item1.lifespan = life;
+            //item1.days_left = days;
             listItems.add(item1);
 
             ListView listView= (ListView) V.findViewById(R.id.MakeupCollectionTab);
@@ -174,4 +186,5 @@ public class CollectionFragment_MakeupTab extends Fragment  {
 //Close the database
         db.close();
     }
+
 }

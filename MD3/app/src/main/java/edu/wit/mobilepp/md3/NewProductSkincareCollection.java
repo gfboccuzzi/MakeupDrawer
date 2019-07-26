@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class NewProductSkincareCollection extends AppCompatActivity {
@@ -112,6 +113,35 @@ public class NewProductSkincareCollection extends AppCompatActivity {
                     life=12;
                 }
 
+//                Integer days_left;
+//                if(life!=null) {
+//                    Calendar c = Calendar.getInstance();
+//                    Calendar cal = Calendar.getInstance();
+//                    //Date purchase_date;
+//                    try {
+////            purchase_date = dateFormat.parse(item.purchase_date);
+////            date = dateFormat.format(date1);
+////            Log.v("new",date1.toString());
+//                        c.setTime(dateFormat.parse(date));
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
+//                    c.add(Calendar.MONTH, (life));
+//                    Date death_date = c.getTime();
+//                    Date todays_date = cal.getTime();
+//                    Integer days = daysBetween(todays_date, death_date);
+//                    if(days>0) {
+//                        days_left=days;
+//                    }
+//                    else{
+//                        days_left=-1;
+//                    }
+//                }
+//                else {
+//                    days_left=-2;
+//                }
+
+
                 // Set the path and database name
                 String path = "/data/data/" + getPackageName() + "/skincare_collection.db";
                 Log.v("db", path);
@@ -120,7 +150,7 @@ public class NewProductSkincareCollection extends AppCompatActivity {
                 db = SQLiteDatabase.openOrCreateDatabase(path, null);
                 // Create a table - people
                 String sql = "CREATE TABLE IF NOT EXISTS skincare_collection" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER);";
+                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
 
                 db.execSQL(sql);
 
@@ -132,6 +162,7 @@ public class NewProductSkincareCollection extends AppCompatActivity {
                 values.put("shade", shade);
                 values.put("date", date);
                 values.put("life", life);
+                //values.put("days", days_left);
                 db.insert("skincare_collection", null, values);
 
                 //Close the database
@@ -143,4 +174,7 @@ public class NewProductSkincareCollection extends AppCompatActivity {
         });
 
     }
+//    public int daysBetween(Date d1, Date d2){
+//        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+//    }
 }

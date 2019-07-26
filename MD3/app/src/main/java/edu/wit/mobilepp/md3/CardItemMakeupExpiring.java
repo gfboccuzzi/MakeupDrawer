@@ -2,7 +2,7 @@ package edu.wit.mobilepp.md3;
 
 import android.graphics.Bitmap;
 
-public class CardItemMakeupCollection {
+public class CardItemMakeupExpiring {
     public Bitmap image;
     public String id;
     public String brand;

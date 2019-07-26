@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -185,6 +186,34 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
                             life=12;
                         }
 
+//                        Integer days_left;
+//                        if(life!=null) {
+//                            Calendar c = Calendar.getInstance();
+//                            Calendar cal = Calendar.getInstance();
+//                            //Date purchase_date;
+//                            try {
+////            purchase_date = dateFormat.parse(item.purchase_date);
+////            date = dateFormat.format(date1);
+////            Log.v("new",date1.toString());
+//                                c.setTime(dateFormat.parse(date));
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+//                            c.add(Calendar.MONTH, (life));
+//                            Date death_date = c.getTime();
+//                            Date todays_date = cal.getTime();
+//                            Integer days = daysBetween(todays_date, death_date);
+//                            if(days>0) {
+//                                days_left=days;
+//                            }
+//                            else{
+//                                days_left=-1;
+//                            }
+//                        }
+//                        else {
+//                            days_left=-2;
+//                        }
+
                         Log.v("wl", date);
                         String path = "/data/data/" + getContext().getPackageName() + "/makeup_wishlist.db";
                         SQLiteDatabase db;
@@ -194,7 +223,7 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
                         db2 = SQLiteDatabase.openOrCreateDatabase(path2, null);
                         // Create a table - people
                         String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER);";
+                                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
                         db2.execSQL(sql);
                         ContentValues values = new ContentValues();
                         values.put("brand", item.brand);
@@ -203,6 +232,7 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
                         values.put("shade", item.shade);
                         values.put("date", date);
                         values.put("life", life);
+                        //values.put("days", days_left);
                         db2.insert("makeup_collection", null, values);
                         db.execSQL("DELETE FROM makeup_wishlist WHERE _ID= " + item.id);
                         l.remove(position);
@@ -220,4 +250,7 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
 
         return view;
     }
+//    public int daysBetween(Date d1, Date d2){
+//        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+//    }
 }

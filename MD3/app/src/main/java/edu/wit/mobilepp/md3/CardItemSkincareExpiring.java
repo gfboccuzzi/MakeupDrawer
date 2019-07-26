@@ -2,7 +2,7 @@ package edu.wit.mobilepp.md3;
 
 import android.graphics.Bitmap;
 
-public class CardItemMakeupCollection {
+public class CardItemSkincareExpiring {
     public Bitmap image;
     public String id;
     public String brand;
@@ -11,5 +11,5 @@ public class CardItemMakeupCollection {
     public String shade;
     public String purchase_date;
     public Integer lifespan;
-//    public Integer days_left;
+   // public Integer days_left;
 }

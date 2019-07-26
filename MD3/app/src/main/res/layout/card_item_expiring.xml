@@ -13,7 +13,7 @@
     app:cardElevation="8dp">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/deletebutton"
+        android:id="@+id/deletebutton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
@@ -32,6 +32,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.802"
         app:srcCompat="@drawable/trash" />
+
+    <TextView
+        android:id="@+id/days_left"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text=""
+        android:textAlignment="textEnd"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -79,7 +93,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp" />
+
         </LinearLayout>
+
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

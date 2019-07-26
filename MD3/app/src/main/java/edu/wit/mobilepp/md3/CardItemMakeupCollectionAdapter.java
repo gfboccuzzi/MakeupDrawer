@@ -67,7 +67,7 @@ public class CardItemMakeupCollectionAdapter extends ArrayAdapter<CardItemMakeup
                 db = SQLiteDatabase.openOrCreateDatabase(path, null);
                 // Create a table - people
                 String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life TEXT);";
+                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
                 db.execSQL(sql);
                 db.execSQL("DELETE FROM makeup_collection WHERE _ID= " + item.id);
                 db.close();

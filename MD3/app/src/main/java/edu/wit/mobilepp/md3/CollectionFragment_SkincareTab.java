@@ -30,6 +30,8 @@ public class CollectionFragment_SkincareTab extends Fragment  {
 
         CardItemSkincareCollectionAdapter listViewAdapter = new CardItemSkincareCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
+        listView.setDivider(null);
+        listView.setDividerHeight(0);
         // Inflate the layout for this fragment
 
         FloatingActionButton mFab = (FloatingActionButton) X.findViewById(R.id.floatingActionButton2);
@@ -57,10 +59,10 @@ public class CollectionFragment_SkincareTab extends Fragment  {
         db = SQLiteDatabase.openOrCreateDatabase(path, null);
         // Create a table - people
         String sql = "CREATE TABLE IF NOT EXISTS skincare_collection" +
-                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER);";
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
 
         db.execSQL(sql);
-        String[] columns = {"_id","brand","product","category","shade","date","life"};
+        String[] columns = {"_id","brand","product","category","shade","date","life","days"};
         String where = null;
         String[] where_args = null;
         String having = null;
@@ -81,6 +83,13 @@ public class CollectionFragment_SkincareTab extends Fragment  {
             }catch(NumberFormatException e){
                 life=null;
             }
+//            Integer days;
+//            try {
+//                days = Integer.parseInt(cursor.getString(cursor.getColumnIndex("days")));
+//            }catch(NumberFormatException e){
+//                days=null;
+//            }
+
             Bitmap image;
 
             if (category.equals("Cleanser")){
@@ -115,6 +124,7 @@ public class CollectionFragment_SkincareTab extends Fragment  {
             item1.shade = shade;
             item1.purchase_date = date;
             item1.lifespan = life;
+            //item1.days_left = days;
             listItems.add(item1);
 
             ListView listView= (ListView) X.findViewById(R.id.SkincareCollectionTab);

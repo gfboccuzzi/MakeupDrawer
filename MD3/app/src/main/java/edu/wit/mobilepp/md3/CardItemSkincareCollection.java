@@ -11,4 +11,5 @@ public class CardItemSkincareCollection {
     public String shade;
     public String purchase_date;
     public Integer lifespan;
+//    public Integer days_left;
 }

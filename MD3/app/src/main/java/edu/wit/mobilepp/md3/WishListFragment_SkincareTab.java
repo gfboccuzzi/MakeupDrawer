@@ -30,6 +30,8 @@ public class WishListFragment_SkincareTab extends Fragment  {
 
         CardItemSkincareWishListAdapter listViewAdapter = new CardItemSkincareWishListAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
+        listView.setDivider(null);
+        listView.setDividerHeight(0);
         // Inflate the layout for this fragment
 
         FloatingActionButton mFab = (FloatingActionButton) X.findViewById(R.id.floatingActionButton4);

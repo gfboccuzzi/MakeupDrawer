@@ -31,7 +31,8 @@ public class WishListFragment_MakeupTab extends Fragment  {
 
         CardItemMakeupWishListAdapter listViewAdapter = new CardItemMakeupWishListAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
-
+        listView.setDivider(null);
+        listView.setDividerHeight(0);
 
         // Inflate the layout for this fragment
         FloatingActionButton mFab = (FloatingActionButton) V.findViewById(R.id.floatingActionButton3);
