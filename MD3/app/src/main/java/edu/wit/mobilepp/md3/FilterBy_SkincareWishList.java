@@ -1,32 +1,31 @@
 package edu.wit.mobilepp.md3;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FilterBy_MakeupCollection extends AppCompatActivity {
+public class FilterBy_SkincareWishList extends AppCompatActivity {
 
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
-    public static String category_selection_mc=null;
-    public static String specific_selection_mc=null;
+    public static String category_selection_scwl=null;
+    public static String specific_selection_scwl=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filter_layout);
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        expandableListDetail = ExpandableListDataPump_MakeupCollection.getData();
+        expandableListDetail = ExpandableListDataPump_SkincareWishList.getData();
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
@@ -58,11 +57,11 @@ public class FilterBy_MakeupCollection extends AppCompatActivity {
 //                Bundle bundle = new Bundle();
 //                String category_selection;
 //                String specific_selection;
-                category_selection_mc=expandableListTitle.get(groupPosition);
-                specific_selection_mc=expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition);
+                category_selection_scwl=expandableListTitle.get(groupPosition);
+                specific_selection_scwl=expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition);
 
-                Log.v("Filer-cat", category_selection_mc);
-                Log.v("Filter-spec", specific_selection_mc);
+                Log.v("Filer-cat", category_selection_scwl);
+                Log.v("Filter-spec", specific_selection_scwl);
 
                 finish();
 
@@ -74,8 +73,8 @@ public class FilterBy_MakeupCollection extends AppCompatActivity {
         clearfilters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                category_selection_mc=null;
-                specific_selection_mc=null;
+                category_selection_scwl=null;
+                specific_selection_scwl=null;
                 finish();
             }
         });

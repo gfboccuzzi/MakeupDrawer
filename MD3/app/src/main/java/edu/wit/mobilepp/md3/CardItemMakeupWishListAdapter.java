@@ -223,7 +223,7 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
                         db2 = SQLiteDatabase.openOrCreateDatabase(path2, null);
                         // Create a table - people
                         String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
+                                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
                         db2.execSQL(sql);
                         ContentValues values = new ContentValues();
                         values.put("brand", item.brand);
@@ -234,6 +234,7 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
                         values.put("life", life);
                         //values.put("days", days_left);
                         db2.insert("makeup_collection", null, values);
+                        db2.execSQL("UPDATE makeup_collection SET date_sort=substr(date,7,4)||'-'||substr(date,1,2)||'-'||substr(date,4,2);");
                         db.execSQL("DELETE FROM makeup_wishlist WHERE _ID= " + item.id);
                         l.remove(position);
                         notifyDataSetChanged();

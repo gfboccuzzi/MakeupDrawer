@@ -45,7 +45,7 @@ public class ExpiringFragment_MakeupTab extends Fragment  {
         SQLiteDatabase db;
         db = SQLiteDatabase.openOrCreateDatabase(path, null);
         String sql = "CREATE TABLE if NOT EXISTS makeup_collection" +
-                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
 
         db.execSQL(sql);
         String[] columns = {"_id","brand","product","category","shade","date","life","days"};

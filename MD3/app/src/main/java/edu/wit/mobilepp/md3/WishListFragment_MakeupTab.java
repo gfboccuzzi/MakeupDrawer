@@ -33,7 +33,15 @@ public class WishListFragment_MakeupTab extends Fragment  {
         listView.setAdapter(listViewAdapter);
         listView.setDivider(null);
         listView.setDividerHeight(0);
-
+        FloatingActionButton filtbutmwl = (FloatingActionButton) V.findViewById(R.id.filterbuttonmwl);
+        filtbutmwl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FilterBy_MakeupWishList.class);
+                intent.setClass(getActivity(), FilterBy_MakeupWishList.class);
+                startActivity(intent);
+            }
+        });
         // Inflate the layout for this fragment
         FloatingActionButton mFab = (FloatingActionButton) V.findViewById(R.id.floatingActionButton3);
         mFab.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +62,18 @@ public class WishListFragment_MakeupTab extends Fragment  {
     @Override
     public void onStart() {
         super.onStart();
+        String cat= FilterBy_MakeupWishList.category_selection_mwl;
+        String spec= FilterBy_MakeupWishList.specific_selection_mwl;
 
+        String whereby=null;
+        if (cat=="Category") {
+            whereby = "category= '" + spec + "'";
+            Log.v("category", whereby);
+        }
+        else if (cat=="Brand"){
+            whereby="brand= '" + spec +"'";
+            Log.v("brand", whereby);
+        }
         String path = "/data/data/" + getActivity().getPackageName() + "/makeup_wishlist.db";
         Log.v("db", path);
         // Open the database. If it doesn't exist, create it.
@@ -66,7 +85,7 @@ public class WishListFragment_MakeupTab extends Fragment  {
 
         db.execSQL(sql);
         String[] columns = {"_id","brand","product","category","shade"};
-        String where = null;
+        String where = whereby;
         String[] where_args = null;
         String having = null;
         String group_by = null;
