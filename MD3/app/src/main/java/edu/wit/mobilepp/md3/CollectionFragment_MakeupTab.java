@@ -14,11 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class CollectionFragment_MakeupTab extends Fragment  {
@@ -29,15 +25,24 @@ public class CollectionFragment_MakeupTab extends Fragment  {
         V = inflater.inflate(R.layout.fragment_collection_tab1_makeup, container, false);
 
 
-        List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
+        final List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
 
-        ListView listView= (ListView) V.findViewById(R.id.MakeupCollectionTab);
+        final ListView listView= (ListView) V.findViewById(R.id.MakeupCollectionTab);
 
         CardItemMakeupCollectionAdapter listViewAdapter = new CardItemMakeupCollectionAdapter(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listView.setAdapter(listViewAdapter);
         listView.setDivider(null);
         listView.setDividerHeight(0);
 
+        FloatingActionButton filtbut = (FloatingActionButton) V.findViewById(R.id.filterbutton);
+        filtbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FilterBy_MakeupCollection.class);
+                intent.setClass(getActivity(), FilterBy_MakeupCollection.class);
+                startActivity(intent);
+            }
+        });
          // Inflate the layout for this fragment
         FloatingActionButton mFab = (FloatingActionButton) V.findViewById(R.id.floatingActionButton);
         mFab.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +63,29 @@ public class CollectionFragment_MakeupTab extends Fragment  {
     @Override
     public void onStart() {
         super.onStart();
+        String cat= FilterBy_MakeupCollection.category_selection_mc;
+        String spec= FilterBy_MakeupCollection.specific_selection_mc;
 
+        String sortby=null;
+        String whereby=null;
+        if (cat=="Sort By"){
+            whereby=null;
+            if (spec.equals("Newest to Oldest")){
+                sortby="date_sort DESC";
+            }
+            else if(spec.equals("Oldest to Newest")){
+                sortby="date_sort ASC";
+            }
+        }
+        else if (cat=="Category"){
+            whereby="category= '" + spec +"'";
+            Log.v("category", whereby);
+            sortby=null;        }
+        else if (cat=="Brand"){
+            whereby="brand= '" + spec +"'";
+            Log.v("brand", whereby);
+            sortby=null;
+        }
         String path = "/data/data/" + getActivity().getPackageName() + "/makeup_collection.db";
         Log.v("db", path);
         // Open the database. If it doesn't exist, create it.
@@ -66,15 +93,15 @@ public class CollectionFragment_MakeupTab extends Fragment  {
         db = SQLiteDatabase.openOrCreateDatabase(path, null);
         // Create a table - people
         String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
 
         db.execSQL(sql);
         String[] columns = {"_id","brand","product","category","shade","date","life","days"};
-        String where = null;
+        String where = whereby;
         String[] where_args = null;
         String having = null;
         String group_by = null;
-        String order_by = null;
+        String order_by = sortby;
         Cursor cursor = db.query("makeup_collection", columns, where, where_args, group_by, having, order_by);
         List<CardItemMakeupCollection> listItems = new ArrayList<CardItemMakeupCollection>();
         while(cursor.moveToNext()){

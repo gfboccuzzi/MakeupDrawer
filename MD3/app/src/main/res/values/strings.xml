@@ -25,4 +25,6 @@
     <string name="question3">If you don\'t know - don\'t worry! We have some predetermined lengths that types of products are generally good for, it\'s just always best to try to use a products specific shelf life.</string>
     <string name="popupbutton">Add to Collection</string>
     <string name="month">Months</string>
+    <string name="done">Done</string>
+    <string name="clear">Clear Filters</string>
 </resources>

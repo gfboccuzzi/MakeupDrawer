@@ -194,7 +194,7 @@ public class NewProductMakeupCollection extends AppCompatActivity {
                 db = SQLiteDatabase.openOrCreateDatabase(path, null);
                 // Create a table - people
                 String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
+                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
 
                 db.execSQL(sql);
 
@@ -208,6 +208,7 @@ public class NewProductMakeupCollection extends AppCompatActivity {
                 values.put("life", life);
                 //values.put("days", days_left);
                 db.insert("makeup_collection", null, values);
+                db.execSQL("UPDATE makeup_collection SET date_sort=substr(date,7,4)||'-'||substr(date,1,2)||'-'||substr(date,4,2);");
 
                 //Close the database
                 db.close();

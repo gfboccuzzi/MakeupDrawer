@@ -23,6 +23,7 @@
         <activity android:name=".NewProductSkincareCollection"></activity>
         <activity android:name=".NewProductSkincareWishList"></activity>
         <activity android:name=".NewProductMakeupWishList"></activity>
+        <activity android:name=".FilterBy_MakeupCollection"></activity>
 
     </application>
 
