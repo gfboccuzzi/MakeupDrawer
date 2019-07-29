@@ -3,7 +3,9 @@ package edu.wit.mobilepp.md3;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,14 +57,15 @@ public class CardItemSkincareExpiringAdapter extends ArrayAdapter<CardItemSkinca
 
         TextView days_left;
         days_left = (TextView) view.findViewById(R.id.days_left);
-        String path = "/data/data/" + getContext().getPackageName() + "/makeup_collection.db";
+        String path = "/data/data/" + getContext().getPackageName() + "/skincare_collection.db";
         SQLiteDatabase db;
         db = SQLiteDatabase.openOrCreateDatabase(path, null);
         // Create a table - people
-        String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
+        String sql = "CREATE TABLE IF NOT EXISTS skincare_collection" +
                 "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
         db.execSQL(sql);
         Integer days;
+        CardView ly_root = (CardView) view.findViewById(R.id.ly_root);
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         if(item.lifespan!=null) {
             Calendar c = Calendar.getInstance();
@@ -82,13 +85,22 @@ public class CardItemSkincareExpiringAdapter extends ArrayAdapter<CardItemSkinca
             Integer days1 = daysBetween(todays_date, death_date);
             if(days1>0) {
                 days=days1;
+                if (days>30) {
+                    ly_root.setCardBackgroundColor(Color.rgb(138,237,164));
+                }
+                else{
+                    ly_root.setCardBackgroundColor(Color.rgb(255,251,148));
+                }
             }
             else{
                 days=-1;
+                ly_root.setCardBackgroundColor(Color.rgb(255, 66, 66));
+
             }
         }
         else {
             days=-2;
+            ly_root.setCardBackgroundColor(Color.rgb(219,217, 217));
         }
         if(days>0) {
             days_left.setText(days.toString() + " Days Left");
@@ -100,7 +112,7 @@ public class CardItemSkincareExpiringAdapter extends ArrayAdapter<CardItemSkinca
             days_left.setText("UNK" + " Days Left");
         }
         ContentValues values = new ContentValues();
-        db.execSQL("UPDATE makeup_collection SET days =  " + days + " WHERE _id= " + item.id+ ";");
+        db.execSQL("UPDATE skincare_collection SET days =  " + days + " WHERE _id= " + item.id+ ";");
         db.close();
 
 //        TextView purchase_date;
