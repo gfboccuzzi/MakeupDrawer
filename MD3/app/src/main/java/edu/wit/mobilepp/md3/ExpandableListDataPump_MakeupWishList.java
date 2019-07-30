@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,6 +60,7 @@ public class ExpandableListDataPump_MakeupWishList {
             String brands = cursor1.getString(cursor1.getColumnIndex("brand"));
             brand.add(brands);
         }
+        Collections.sort(brand);
 
         expandableListDetail.put("Category", category);
         expandableListDetail.put("Brand", brand);

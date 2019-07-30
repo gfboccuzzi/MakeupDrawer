@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -65,6 +66,7 @@ import java.util.List;
                 String brands = cursor1.getString(cursor1.getColumnIndex("brand"));
                 brand.add(brands);
             }
+            Collections.sort(brand);
 
             expandableListDetail.put("Sort By", sortby);
             expandableListDetail.put("Category", category);
