@@ -178,7 +178,7 @@ public class CollectionFragment_MakeupTab extends Fragment  {
             else if (category.equals("Mascara")){
                 image =
                         BitmapFactory.decodeResource(getResources(), R.drawable.mascara);}
-            else if (category.equals("Setting Poweder")){
+            else if (category.equals("Setting Powder")){
                 image =
                         BitmapFactory.decodeResource(getResources(), R.drawable.setting_powder);}
             else if (category.equals("Setting Spray")){
