@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -74,6 +75,12 @@ public class NewProductMakeupCollection extends AppCompatActivity {
             TextInputEditText lifespan = (TextInputEditText)findViewById(R.id.lifespan);
             TextInputEditText purchase_date = (TextInputEditText) findViewById(R.id.purchase_date);
 
+            TextInputLayout brand_layout = (TextInputLayout)findViewById(R.id.textInputLayout5);
+            TextInputLayout product_layout = (TextInputLayout)findViewById(R.id.textInputLayout);
+            TextInputLayout shade_layout = (TextInputLayout)findViewById(R.id.textInputLayout2);
+            TextInputLayout date_layout = (TextInputLayout)findViewById(R.id.textInputLayout3);
+
+
             @Override
             public void onClick(View v) {
                 Log.v("new", "click registered");
@@ -88,7 +95,7 @@ public class NewProductMakeupCollection extends AppCompatActivity {
                     date = dateFormat.format(date1);
                     Log.v("new",date1.toString());
                 }catch (ParseException e){
-                    date="a";
+                    date = "";
                     e.printStackTrace();
                 }
                 Integer life;
@@ -187,34 +194,65 @@ public class NewProductMakeupCollection extends AppCompatActivity {
 //                    days_left=-2;
 //                }
 
-                // Set the path and database name
-                String path = "/data/data/" + getPackageName() + "/makeup_collection.db";
-                Log.v("db", path);
-                // Open the database. If it doesn't exist, create it.
-                SQLiteDatabase db;
-                db = SQLiteDatabase.openOrCreateDatabase(path, null);
-                // Create a table - people
-                String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
 
-                db.execSQL(sql);
+                //error check
+                brand_layout.setError(null);
+                product_layout.setError(null);
+                shade_layout.setError(null);
+                date_layout.setError(null);
 
-                // Add Data
-                ContentValues values = new ContentValues();
-                values.put("brand", brand);
-                values.put("product", product);
-                values.put("category", category);
-                values.put("shade", shade);
-                values.put("date", date);
-                values.put("life", life);
-                //values.put("days", days_left);
-                db.insert("makeup_collection", null, values);
-                db.execSQL("UPDATE makeup_collection SET date_sort=substr(date,7,4)||'-'||substr(date,1,2)||'-'||substr(date,4,2);");
+                if(brand.isEmpty()) {
+                    brand_layout.setError("You must enter a brand name.");
+                } else {
+                    if(product.isEmpty()) {
+                        product_layout.setError("You must enter a product name.");
+                    } else {
+                        if(shade.isEmpty()) {
+                            shade_layout.setError("You must enter a shade.");
+                        } else {
+                            if(date.isEmpty()) {
+                                Log.v("inpDate", date);
+                                date_layout.setError("You must enter a purchase date.");
+                            } else {
+                                Log.v("inpDate", date);
+                                // Set the path and database name
+                                String path = "/data/data/" + getPackageName() + "/makeup_collection.db";
+                                Log.v("db", path);
+                                // Open the database. If it doesn't exist, create it.
+                                SQLiteDatabase db;
+                                db = SQLiteDatabase.openOrCreateDatabase(path, null);
+                                // Create a table - people
+                                String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
+                                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
 
-                //Close the database
-                db.close();
+                                db.execSQL(sql);
 
-                finish();
+                                // Add Data
+                                ContentValues values = new ContentValues();
+                                values.put("brand", brand);
+                                values.put("product", product);
+                                values.put("category", category);
+                                values.put("shade", shade);
+                                values.put("date", date);
+                                values.put("life", life);
+                                //values.put("days", days_left);
+                                db.insert("makeup_collection", null, values);
+                                db.execSQL("UPDATE makeup_collection SET date_sort=substr(date,7,4)||'-'||substr(date,1,2)||'-'||substr(date,4,2);");
+
+                                //Close the database
+                                db.close();
+
+//                if(brand.equals("")){
+//                    brand_layout.setError("You must enter a brand name.");
+//                }
+//                else {
+//                    finish();
+//                }
+                                finish();
+                            }
+                        }
+                    }
+                }
 
             }
 
