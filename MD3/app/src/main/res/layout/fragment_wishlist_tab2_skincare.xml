@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity" >
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/filterbuttonscwl"
         android:layout_width="wrap_content"
@@ -16,19 +17,20 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="88dp"
-        android:backgroundTint="#FF7697"
+        android:backgroundTint="@color/colorPrimary"
         android:clickable="true"
         app:srcCompat="@drawable/filter" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:backgroundTint="#FF7697"
-        android:clickable="true"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
         app:srcCompat="@drawable/baseline_add_white_18dp" />
 
     <ListView

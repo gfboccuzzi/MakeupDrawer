@@ -20,6 +20,7 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -214,6 +215,7 @@ public class NewProductMakeupCollection extends AppCompatActivity {
                 db.close();
 
                 finish();
+
             }
 
         });

@@ -33,7 +33,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#FF7697"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/clear"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"

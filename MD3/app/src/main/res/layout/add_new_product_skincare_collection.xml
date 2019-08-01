@@ -2,10 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFD7E9"
-    android:id="@+id/constraintLayout2">
+    android:background="@color/colorPrimaryDark">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout5sc"
@@ -90,7 +90,7 @@
             android:layout_width="361dp"
             android:layout_height="wrap_content"
             android:hint="@string/purchase_field"
-            android:inputType="date"/>
+            android:inputType="date" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -112,13 +112,13 @@
             android:layout_width="361dp"
             android:layout_height="wrap_content"
             android:hint="@string/lifespan_field"
-            android:inputType="number"/>
+            android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
     <Spinner
         android:id="@+id/spinnersc"
         android:layout_width="395dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -139,7 +139,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/new_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,13 +150,14 @@
 
     <TextView
         android:id="@+id/textViewsc"
-        android:layout_width="wrap_content"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/create"
+        android:textAlignment="center"
         android:textColor="#575757"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -175,8 +176,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#FF7697"
+        android:backgroundTint="@color/colorPrimary"
         android:clickable="true"
+        app:elevation="0dp"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -184,7 +186,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.802"
-        app:srcCompat="@drawable/question"
-        app:elevation="0dp"/>
+        app:srcCompat="@drawable/question" />
 
 </android.support.constraint.ConstraintLayout>
