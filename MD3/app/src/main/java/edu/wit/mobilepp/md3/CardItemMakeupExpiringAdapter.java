@@ -7,11 +7,14 @@ import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -27,9 +30,12 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class CardItemMakeupExpiringAdapter extends ArrayAdapter<CardItemMakeupExpiring> {
     public List<CardItemMakeupExpiring> l;
     private LayoutInflater mInflater;
+    PopupWindow popupWindow;
+    private Context mcontext;
     public CardItemMakeupExpiringAdapter(Context context, int rid, List<CardItemMakeupExpiring> list){
         super(context, rid, list);
         l=list;
+        mcontext=context;
         mInflater =
                 (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
@@ -130,17 +136,39 @@ public class CardItemMakeupExpiringAdapter extends ArrayAdapter<CardItemMakeupEx
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                l.remove(position);
-                notifyDataSetChanged();
-                String path = "/data/data/" + getContext().getPackageName() + "/makeup_collection.db";
-                SQLiteDatabase db;
-                db = SQLiteDatabase.openOrCreateDatabase(path, null);
-                // Create a table - people
-                String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
-                db.execSQL(sql);
-                db.execSQL("DELETE FROM makeup_collection WHERE _ID= " + item.id);
-                db.close();
+                LayoutInflater layoutInflater = (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View customView = layoutInflater.inflate(R.layout.popup_window_delete, null);
+
+                popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setElevation(20);
+                popupWindow.showAtLocation(customView, Gravity.CENTER,0,0);
+                popupWindow.setFocusable(true);
+                popupWindow.update();
+                Button yes_wl = (Button) customView.findViewById(R.id.yes_wl);
+                yes_wl.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        l.remove(position);
+                        notifyDataSetChanged();
+                        String path = "/data/data/" + getContext().getPackageName() + "/makeup_collection.db";
+                        SQLiteDatabase db;
+                        db = SQLiteDatabase.openOrCreateDatabase(path, null);
+                        // Create a table - people
+                        String sql = "CREATE TABLE IF NOT EXISTS makeup_collection" +
+                                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER);";
+                        db.execSQL(sql);
+                        db.execSQL("DELETE FROM makeup_collection WHERE _ID= " + item.id);
+                        db.close();
+                        popupWindow.dismiss();
+                    }
+                });
+                Button no_wl=(Button) customView.findViewById(R.id.no_wl);
+                no_wl.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
 
             }
         });

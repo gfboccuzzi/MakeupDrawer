@@ -71,18 +71,40 @@ public class CardItemSkincareWishListAdapter extends ArrayAdapter<CardItemSkinca
         deleteBtn2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                l.remove(position);
-                notifyDataSetChanged();
-                String path = "/data/data/" + getContext().getPackageName() + "/skincare_wishlist.db";
-                Log.v("delete", path);
-                SQLiteDatabase db;
-                db = SQLiteDatabase.openOrCreateDatabase(path, null);
-                // Create a table - people
-                String sql = "CREATE TABLE IF NOT EXISTS skincare_wishlist" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT);";
-                db.execSQL(sql);
-                db.execSQL("DELETE FROM skincare_wishlist WHERE _ID= " + item.id);
-                db.close();
+                LayoutInflater layoutInflater = (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View customView = layoutInflater.inflate(R.layout.popup_window_delete, null);
+
+                popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setElevation(20);
+                popupWindow.showAtLocation(customView, Gravity.CENTER,0,0);
+                popupWindow.setFocusable(true);
+                popupWindow.update();
+                Button yes_wl = (Button) customView.findViewById(R.id.yes_wl);
+                yes_wl.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        l.remove(position);
+                        notifyDataSetChanged();
+                        String path = "/data/data/" + getContext().getPackageName() + "/skincare_wishlist.db";
+                        Log.v("delete", path);
+                        SQLiteDatabase db;
+                        db = SQLiteDatabase.openOrCreateDatabase(path, null);
+                        // Create a table - people
+                        String sql = "CREATE TABLE IF NOT EXISTS skincare_wishlist" +
+                                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT);";
+                        db.execSQL(sql);
+                        db.execSQL("DELETE FROM skincare_wishlist WHERE _ID= " + item.id);
+                        db.close();
+                        popupWindow.dismiss();
+                    }
+                });
+                Button no_wl=(Button) customView.findViewById(R.id.no_wl);
+                no_wl.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
 
             }
         });
