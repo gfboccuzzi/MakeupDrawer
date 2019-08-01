@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,10 @@ public class NewProductMakeupWishList extends AppCompatActivity {
             TextInputEditText product_name = (TextInputEditText)findViewById(R.id.product_namewl);
             TextInputEditText shade_name = (TextInputEditText)findViewById(R.id.shade_namewl);
 
+            TextInputLayout brand_layout = (TextInputLayout)findViewById(R.id.textInputLayout5wl);
+            TextInputLayout product_layout = (TextInputLayout)findViewById(R.id.textInputLayoutwl);
+            TextInputLayout shade_layout = (TextInputLayout)findViewById(R.id.textInputLayout2wl);
+
             @Override
             public void onClick(View v) {
                 String brand = brand_name.getText().toString();
@@ -38,30 +43,47 @@ public class NewProductMakeupWishList extends AppCompatActivity {
                 String category = spinner.getSelectedItem().toString();
                 String shade = shade_name.getText().toString();
 
-                // Set the path and database name
-                String path = "/data/data/" + getPackageName() + "/makeup_wishlist.db";
-                Log.v("db", path);
-                // Open the database. If it doesn't exist, create it.
-                SQLiteDatabase db;
-                db = SQLiteDatabase.openOrCreateDatabase(path, null);
-                // Create a table - people
-                String sql = "CREATE TABLE IF NOT EXISTS makeup_wishlist" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT);";
+                //error check
+                brand_layout.setError(null);
+                product_layout.setError(null);
+                shade_layout.setError(null);
 
-                db.execSQL(sql);
+                if(brand.isEmpty()) {
+                    brand_layout.setError("You must enter a brand name.");
+                } else {
+                    if (product.isEmpty()) {
+                        product_layout.setError("You must enter a product name.");
+                    } else {
+                        if (shade.isEmpty()) {
+                            shade_layout.setError("You must enter a shade.");
+                        } else {
+                            // Set the path and database name
+                            String path = "/data/data/" + getPackageName() + "/makeup_wishlist.db";
+                            Log.v("db", path);
+                            // Open the database. If it doesn't exist, create it.
+                            SQLiteDatabase db;
+                            db = SQLiteDatabase.openOrCreateDatabase(path, null);
+                            // Create a table - people
+                            String sql = "CREATE TABLE IF NOT EXISTS makeup_wishlist" +
+                                    "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT);";
 
-                // Add Data
-                ContentValues values = new ContentValues();
-                values.put("brand", brand);
-                values.put("product", product);
-                values.put("category", category);
-                values.put("shade", shade);
-                db.insert("makeup_wishlist", null, values);
+                            db.execSQL(sql);
 
-                //Close the database
-                db.close();
+                            // Add Data
+                            ContentValues values = new ContentValues();
+                            values.put("brand", brand);
+                            values.put("product", product);
+                            values.put("category", category);
+                            values.put("shade", shade);
+                            db.insert("makeup_wishlist", null, values);
 
-                finish();
+                            //Close the database
+                            db.close();
+
+                            finish();
+                        }
+                    }
+                }
             }
 
         });

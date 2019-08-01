@@ -211,10 +211,8 @@ public class NewProductMakeupCollection extends AppCompatActivity {
                             shade_layout.setError("You must enter a shade.");
                         } else {
                             if(date.isEmpty()) {
-                                Log.v("inpDate", date);
                                 date_layout.setError("You must enter a purchase date.");
                             } else {
-                                Log.v("inpDate", date);
                                 // Set the path and database name
                                 String path = "/data/data/" + getPackageName() + "/makeup_collection.db";
                                 Log.v("db", path);
@@ -242,12 +240,6 @@ public class NewProductMakeupCollection extends AppCompatActivity {
                                 //Close the database
                                 db.close();
 
-//                if(brand.equals("")){
-//                    brand_layout.setError("You must enter a brand name.");
-//                }
-//                else {
-//                    finish();
-//                }
                                 finish();
                             }
                         }

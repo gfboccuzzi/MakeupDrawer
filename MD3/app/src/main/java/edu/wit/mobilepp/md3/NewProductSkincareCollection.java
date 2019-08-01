@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -72,6 +73,11 @@ public class NewProductSkincareCollection extends AppCompatActivity {
             TextInputEditText purchase_date = (TextInputEditText)findViewById(R.id.purchase_datesc);
             TextInputEditText lifespan = (TextInputEditText)findViewById(R.id.lifespansc);
 
+            TextInputLayout brand_layout = (TextInputLayout)findViewById(R.id.textInputLayout5sc);
+            TextInputLayout product_layout = (TextInputLayout)findViewById(R.id.textInputLayoutsc);
+            TextInputLayout shade_layout = (TextInputLayout)findViewById(R.id.textInputLayout2sc);
+            TextInputLayout date_layout = (TextInputLayout)findViewById(R.id.textInputLayout3sc);
+
             @Override
             public void onClick(View v){
                 String brand = brand_name.getText().toString();
@@ -85,7 +91,7 @@ public class NewProductSkincareCollection extends AppCompatActivity {
                     date = dateFormat.format(date1);
                     Log.v("new",date1.toString());
                 }catch (ParseException e){
-                    date="a";
+                    date = "";
                     e.printStackTrace();
                 }
                 Integer life;
@@ -141,34 +147,55 @@ public class NewProductSkincareCollection extends AppCompatActivity {
 //                    days_left=-2;
 //                }
 
+                //error check
+                brand_layout.setError(null);
+                product_layout.setError(null);
+                shade_layout.setError(null);
+                date_layout.setError(null);
 
-                // Set the path and database name
-                String path = "/data/data/" + getPackageName() + "/skincare_collection.db";
-                Log.v("db", path);
-                // Open the database. If it doesn't exist, create it.
-                SQLiteDatabase db;
-                db = SQLiteDatabase.openOrCreateDatabase(path, null);
-                // Create a table - people
-                String sql = "CREATE TABLE IF NOT EXISTS skincare_collection" +
-                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
+                if(brand.isEmpty()) {
+                    brand_layout.setError("You must enter a brand name.");
+                } else {
+                    if (product.isEmpty()) {
+                        product_layout.setError("You must enter a product name.");
+                    } else {
+                        if (shade.isEmpty()) {
+                            shade_layout.setError("You must enter a shade.");
+                        } else {
+                            if (date.isEmpty()) {
+                                date_layout.setError("You must enter a purchase date.");
+                            } else {
+                                // Set the path and database name
+                                String path = "/data/data/" + getPackageName() + "/skincare_collection.db";
+                                Log.v("db", path);
+                                // Open the database. If it doesn't exist, create it.
+                                SQLiteDatabase db;
+                                db = SQLiteDatabase.openOrCreateDatabase(path, null);
+                                // Create a table - people
+                                String sql = "CREATE TABLE IF NOT EXISTS skincare_collection" +
+                                        "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
 
-                db.execSQL(sql);
+                                db.execSQL(sql);
 
-                // Add Data
-                ContentValues values = new ContentValues();
-                values.put("brand", brand);
-                values.put("product", product);
-                values.put("category", category);
-                values.put("shade", shade);
-                values.put("date", date);
-                values.put("life", life);
-                //values.put("days", days_left);
-                db.insert("skincare_collection", null, values);
-                db.execSQL("UPDATE skincare_collection SET date_sort=substr(date,7,4)||'-'||substr(date,1,2)||'-'||substr(date,4,2);");
-                //Close the database
-                db.close();
+                                // Add Data
+                                ContentValues values = new ContentValues();
+                                values.put("brand", brand);
+                                values.put("product", product);
+                                values.put("category", category);
+                                values.put("shade", shade);
+                                values.put("date", date);
+                                values.put("life", life);
+                                //values.put("days", days_left);
+                                db.insert("skincare_collection", null, values);
+                                db.execSQL("UPDATE skincare_collection SET date_sort=substr(date,7,4)||'-'||substr(date,1,2)||'-'||substr(date,4,2);");
+                                //Close the database
+                                db.close();
 
-                finish();
+                                finish();
+                            }
+                        }
+                    }
+                }
             }
 
         });
