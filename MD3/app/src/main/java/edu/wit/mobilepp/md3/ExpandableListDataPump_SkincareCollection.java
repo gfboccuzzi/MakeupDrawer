@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class ExpandableListDataPump_SkincareCollection {
             String categories = cursor.getString(cursor.getColumnIndex("category"));
             category.add(categories);
         }
-
+        Collections.sort(category);
 
         List<String> brand = new ArrayList<String>();
 
@@ -64,6 +65,7 @@ public class ExpandableListDataPump_SkincareCollection {
             String brands = cursor1.getString(cursor1.getColumnIndex("brand"));
             brand.add(brands);
         }
+        Collections.sort(brand);
 
         expandableListDetail.put("Sort By", sortby);
         expandableListDetail.put("Category", category);

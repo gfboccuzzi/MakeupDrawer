@@ -39,6 +39,7 @@ public class ExpandableListDataPump_MakeupWishList {
             String categories = cursor.getString(cursor.getColumnIndex("category"));
             category.add(categories);
         }
+        Collections.sort(category);
 
         List<String> brand = new ArrayList<String>();
 
