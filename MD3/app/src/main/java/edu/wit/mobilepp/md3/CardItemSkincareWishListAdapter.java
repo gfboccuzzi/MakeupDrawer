@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -127,6 +128,9 @@ public class CardItemSkincareWishListAdapter extends ArrayAdapter<CardItemSkinca
 
                     TextInputEditText purchase_date = (TextInputEditText)customView.findViewById(R.id.purchase_date2);
                     TextInputEditText lifespan = (TextInputEditText)customView.findViewById(R.id.lifespan2);
+
+                    TextInputLayout date_layout = (TextInputLayout)customView.findViewById(R.id.textInputLayout6);
+
                     @Override
                     public void onClick(View v) {
 
@@ -137,7 +141,7 @@ public class CardItemSkincareWishListAdapter extends ArrayAdapter<CardItemSkinca
                             date = dateFormat.format(date1);
                             Log.v("new",date1.toString());
                         }catch (ParseException e){
-                            date="a";
+                            date = "";
                             e.printStackTrace();
                         }
                         Integer life;
@@ -164,32 +168,41 @@ public class CardItemSkincareWishListAdapter extends ArrayAdapter<CardItemSkinca
                         if(item.category.equals("Treatment") && life==null){
                             life=12;
                         }
-                        String path = "/data/data/" + getContext().getPackageName() + "/skincare_wishlist.db";
-                        SQLiteDatabase db;
-                        db = SQLiteDatabase.openOrCreateDatabase(path, null);
-                        String path2 = "/data/data/" + getContext().getPackageName() + "/skincare_collection.db";
-                        SQLiteDatabase db2;
-                        db2 = SQLiteDatabase.openOrCreateDatabase(path2, null);
-                        // Create a table - people
-                        String sql = "CREATE TABLE IF NOT EXISTS skincare_collection" +
-                                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
-                        db2.execSQL(sql);
-                        ContentValues values = new ContentValues();
-                        values.put("brand", item.brand);
-                        values.put("product", item.product);
-                        values.put("category", item.category);
-                        values.put("shade", item.shade);
-                        values.put("date", date);
-                        values.put("life", life);
-                        db2.insert("skincare_collection", null, values);
-                        db2.execSQL("UPDATE skincare_collection SET date_sort=substr(date,7,4)||'-'||substr(date,1,2)||'-'||substr(date,4,2);");
-                        db.execSQL("DELETE FROM skincare_wishlist WHERE _ID= " + item.id);
-                        l.remove(position);
-                        notifyDataSetChanged();
-                        //Close the database
-                        db2.close();
-                        db.close();
-                        popupWindow.dismiss();
+
+                        //error check
+                        date_layout.setError(null);
+
+                        Log.v("empty", "Date: " + date);
+                        if(date.isEmpty()) {
+                            date_layout.setError("You must enter a purchase date.");
+                        } else {
+                            String path = "/data/data/" + getContext().getPackageName() + "/skincare_wishlist.db";
+                            SQLiteDatabase db;
+                            db = SQLiteDatabase.openOrCreateDatabase(path, null);
+                            String path2 = "/data/data/" + getContext().getPackageName() + "/skincare_collection.db";
+                            SQLiteDatabase db2;
+                            db2 = SQLiteDatabase.openOrCreateDatabase(path2, null);
+                            // Create a table - people
+                            String sql = "CREATE TABLE IF NOT EXISTS skincare_collection" +
+                                    "(_id INTEGER PRIMARY KEY AUTOINCREMENT, brand TEXT, product TEXT, category TEXT, shade TEXT, date TEXT, life INTEGER, days INTEGER, date_sort TEXT);";
+                            db2.execSQL(sql);
+                            ContentValues values = new ContentValues();
+                            values.put("brand", item.brand);
+                            values.put("product", item.product);
+                            values.put("category", item.category);
+                            values.put("shade", item.shade);
+                            values.put("date", date);
+                            values.put("life", life);
+                            db2.insert("skincare_collection", null, values);
+                            db2.execSQL("UPDATE skincare_collection SET date_sort=substr(date,7,4)||'-'||substr(date,1,2)||'-'||substr(date,4,2);");
+                            db.execSQL("DELETE FROM skincare_wishlist WHERE _ID= " + item.id);
+                            l.remove(position);
+                            notifyDataSetChanged();
+                            //Close the database
+                            db2.close();
+                            db.close();
+                            popupWindow.dismiss();
+                        }
                     }
                 });
 
