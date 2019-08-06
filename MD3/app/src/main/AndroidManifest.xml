@@ -27,6 +27,10 @@
         <activity android:name=".FilterBy_SkincareCollection"></activity>
         <activity android:name=".FilterBy_SkincareWishList"></activity>
         <activity android:name=".FilterBy_MakeupWishList"></activity>
+        <activity android:name=".EditProductMakeupCollection"></activity>
+        <activity android:name=".EditProductSkincareCollection"></activity>
+        <activity android:name=".EditProductMakeupWishList"></activity>
+        <activity android:name=".EditProductSkincareWishList"></activity>
 
     </application>
 

@@ -1,6 +1,7 @@
 package edu.wit.mobilepp.md3;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
@@ -61,6 +62,24 @@ public class CardItemMakeupCollectionAdapter extends ArrayAdapter<CardItemMakeup
 //        TextView lifespan;
 //        lifespan= (TextView) view.findViewById(R.id.lifespan);
 //        lifespan.setText(item.lifespan);
+        FloatingActionButton editBtn = (FloatingActionButton) view.findViewById(R.id.editbutton);
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) {
+
+                Intent intent = new Intent(mcontext, EditProductMakeupCollection.class);
+                intent.putExtra("itemID", item.id);
+                intent.putExtra("itemBrand", item.brand);
+                intent.putExtra("itemProduct", item.product);
+                intent.putExtra("itemCategory", item.category);
+                intent.putExtra("itemShade", item.shade);
+                mcontext.startActivity(intent);
+            }
+        });
+
+
+
+
         FloatingActionButton deleteBtn = (FloatingActionButton) view.findViewById(R.id.deletebutton);
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override

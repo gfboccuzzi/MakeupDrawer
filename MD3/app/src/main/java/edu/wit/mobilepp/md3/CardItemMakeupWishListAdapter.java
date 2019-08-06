@@ -2,6 +2,7 @@ package edu.wit.mobilepp.md3;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
@@ -63,6 +64,20 @@ public class CardItemMakeupWishListAdapter extends ArrayAdapter<CardItemMakeupWi
         shade = (TextView) view.findViewById(R.id.shade);
         shade.setText(item.shade);
 
+        FloatingActionButton editBtn = (FloatingActionButton) view.findViewById(R.id.editbuttonwl);
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) {
+
+                Intent intent = new Intent(mcontext, EditProductMakeupWishList.class);
+                intent.putExtra("itemID", item.id);
+                intent.putExtra("itemBrand", item.brand);
+                intent.putExtra("itemProduct", item.product);
+                intent.putExtra("itemCategory", item.category);
+                intent.putExtra("itemShade", item.shade);
+                mcontext.startActivity(intent);
+            }
+        });
 //        TextView purchase_date;
 //        purchase_date = (TextView) view.findViewById(R.id.purchase_date);
 //        purchase_date.setText(item.purchase_date);
